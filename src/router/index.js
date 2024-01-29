@@ -1,22 +1,37 @@
- import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHistory } from "vue-router";
+import SuperProduct from "../views/SuperProduct.vue";
+import NotFoundPage from "../views/NotFoundPage.vue";
+import CategoryDetail from "../views/CategoryPage.vue";
+import ProductDetail from "../views/ProductDetail.vue";
 
- const router = createRouter({
+const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
-      path: '/',
-      name: 'home',
-  
+      path: "/",
+      name: "home",
+      component: SuperProduct,
     },
     {
-      path: '/about',
-      name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-     // component: () => import('../views/AboutView.vue')
-    }
-  ]
-})
+      path: "/404",
+      name: "NotFound",
+      component: NotFoundPage,
+    },
+    {
+      path: "/:catchAll(.*)",
+      redirect: "404",
+    },
+    {
+      path: "/category/:catId",
+      name: "catgory",
+      component: CategoryDetail,
+    },
+    {
+      path: "/product/:proId",
+      name: "product",
+      component: ProductDetail,
+    },
+  ],
+});
 
 export default router;

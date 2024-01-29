@@ -1,9 +1,8 @@
 <template>
-    <!-- <button :style="{color,icon,text}" v-text="text"></button> -->
-    <button :style="{ backgroundColor:btnBg}">
-        <p class="text">Shop Now</p>
-        <font-awesome-icon :icon="['fas', 'arrow-right']" style="color: white; margin-left: 15px;"/>
-    </button>
+  <button class="Button-Box" :style="{ backgroundColor: bgBtn }">
+    <div class="Text">{{ TextBtn }}</div>
+    <font-awesome-icon :icon="['fas', 'arrow-right-long']" class="arrow" />
+  </button>
 </template>
 
 <script>
@@ -13,33 +12,35 @@ import { library } from "@fortawesome/fontawesome-svg-core";
 
 library.add(fas);
 
-    export default{
-        name: "Button",
-        components:{
-            FontAwesomeIcon,
-        },
-        props:{
-            btnBg:String,
-        }
-
-    };
+export default {
+  props: ["TextBtn", "bgBtn"],
+  components: {
+    FontAwesomeIcon,
+  },
+};
 </script>
 
 <style scoped>
+.Button-Box {
+  width: 170px;
+  height: 55px;
+  border-radius: 3px;
+  /* border: 2px solid white; */
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
-
-  @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans&family=Lato:ital,wght@0,300;0,400;1,300&family=Quicksand:wght@300;400;700&display=swap');
-    button{
-        color:white;
-        display: flex;
-        align-items: center;
-        flex-direction: row;
-        padding: 8px 15px 8px 15px;
-        width: 120px;
-        height: 30px;
-    }
-    .text{
-        font-weight: 700;
-        font-size: 12px;
-    }
+.arrow {
+  color: white;
+  width: 60px;
+  height: 25px;
+}
+.Text {
+  font-family: "Quicksand", sans-serif;
+  font-size: 18px;
+  font-weight: 800;
+  color: white;
+}
 </style>

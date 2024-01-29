@@ -1,60 +1,44 @@
 <template>
-  <div
-    class="box w-[298px] h-[402px] bg-white relativ rounded-[10px] border-solid border-2 relative"
-    style="border-color: #bce3c9"
-  >
-    <div
-      class="pLabel top-[20px] relative w-[58px] h-[32px] bg-#3BB77E rounded-r-[30px] flex justify-center items-center"
-    >
-      <p class="text-[12px] text-white">-17%</p>
-    </div>
-    <img
-      src="../assets/image/Mango.png"
-      alt=""
-      class="w-[201px] h-[145px] relative top-[40px] left-[47px] bg-none"
-    />
-    <p class="text1 text-[12px] relative top-[60px] left-[20px]">Hodo Foods</p>
-    <p class="text2 relative top-[60px] left-[20px]">
-      Seeds of Change Organic Quioa,<br />Brown, & Red Rice
-    </p>
-    <div class="relative left-[20px] top-[60px] flex row items-center gap-1">
-      <font-awesome-icon
-        :icon="['fas', 'star']"
-        style="color: rgb(253, 192, 64)"
-      />
-      <font-awesome-icon
-        :icon="['fas', 'star']"
-        style="color: rgb(253, 192, 64)"
-      />
-      <font-awesome-icon
-        :icon="['fas', 'star']"
-        style="color: rgb(253, 192, 64)"
-      />
-      <font-awesome-icon
-        :icon="['fas', 'star']"
-        style="color: rgb(253, 192, 64)"
-      />
-      <font-awesome-icon :icon="['fas', 'star']" style="color: #cdcdcd" />
-      <p class="text3 ml-2">(4.0)</p>
-    </div>
-    <p class="relative text-slate-500 top-[65px] left-[20px]">500 gram</p>
-    <div class="flex flex-row justify-between absolute bottom-[25px] items-end w-full">
-      <div class="flex row items-center ml-[20px]">
-        <p class="text4">$2.51</p>
-        <p class="text5 line-through ml-2 mt-1">$2.00</p>
+  <RouterLink :to="`/product/${id}`" class="Product-Box">
+    <div class="Value" :style="{ backgroundColor: Bg_value }">{{ Value }}</div>
+    <img class="Image" :src="Img[0]" alt="Product" />
+    <div class="Details">
+      <span class="hodo">Hodo Foods</span>
+      <div class="Title">{{ Title }}</div>
+      <div class="Reviews">
+        <div class="Star">
+          <font-awesome-icon :icon="['fas', 'star']" style="color: #fdc040" />
+          <font-awesome-icon :icon="['fas', 'star']" style="color: #fdc040" />
+          <font-awesome-icon :icon="['fas', 'star']" style="color: #fdc040" />
+          <font-awesome-icon :icon="['fas', 'star']" style="color: #fdc040" />
+          <font-awesome-icon :icon="['fas', 'star']" style="color: #cdcdcd" />
+        </div>
+        <div class="num">(4.0)</div>
       </div>
-      <div class="w-[50px] border-green-600 border h-[30px]  mr-[20px]">
-        <input type="number" value="1" min="0" class="w-[40px] pl-[10px]">
+      <div class="gram">500gram</div>
+      <div class="money">
+        <div class="dolla">
+          <div class="lg">{{ Supvalue }}</div>
+          <div class="sm">{{ Subvalue }}</div>
+        </div>
+        <div class="">
+          <div class="amount" @click="increaseNum()" v-if="button == true">
+            <!-- <AddButton /> -->
+            <ButtonAdd />
+          </div>
+          <div class="amount" @click="decreaseNum()" v-else><ButtonPlus /></div>
+        </div>
+        <!-- <button
+          class="add"
+          :style="{ backgroundColor: Bgbtn, border: Borderbtn }">
+          <div class="text">{{ Text }}</div>
+          <div class="arrow">
+            {{ Arrow }}
+          </div>
+        </button> -->
       </div>
-      
-      <!-- <div class="relative w-[67px] h-[29px] top-[75px] right-[20px] rounded-[4px] border-solid border-[1px]" style="border-color:#3BB77E ;" > -->
-      <!-- <font-awesome-icon :icon="['fas', 'chevron-up']" class=" absolute w-2 h-2 left-12 top-[3px]"  style="color: #CDCDCD;"/>  -->
-
-      <!-- <font-awesome-icon :icon="['fas', 'chevron-down'] "  class=" absolute w-2 h-2 left-12 top-[18px]" style="color: #CDCDCD;"/>  -->
-
-      <!-- </div> -->
     </div>
-  </div>
+  </RouterLink>
 </template>
 
 <script>
@@ -64,65 +48,172 @@ import { library } from "@fortawesome/fontawesome-svg-core";
 
 library.add(fas);
 
+import ButtonAdd from "./ButtonAdd.vue";
+import ButtonPlus from "./ButtonPlus.vue";
 export default {
+  name: "Product",
+  props: [
+    "id",
+    "Value",
+    "Bg_value",
+    "Img",
+    "Title",
+    "Star",
+    "Supvalue",
+    "Subvalue",
+    "Bgbtn",
+    "Borderbtn",
+    "Text",
+    "Arrow",
+    "arrowup",
+    "arrowdown",
+  ],
   components: {
     FontAwesomeIcon,
+    ButtonAdd,
+    ButtonPlus,
   },
   methods: {
     increaseNum() {
       this.button = false;
     },
     decreaseNum() {
-      let n = document.getElementById("input_amount");
+      let n = document.getElementById("input_amout");
       if (n.value == 0) {
         this.button = true;
       }
     },
   },
+  data() {
+    return {
+      button: true,
+    };
+  },
 };
 </script>
-<style>
-@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans&family=Lato:ital,wght@0,300;0,400;1,300&family=Quicksand:wght@300;400;700&display=swap");
-.box {
-  font-family: Quicksand;
+
+<style scoped>
+@import url("https://fonts.googleapis.com/css2?family=Kantumruy+Pro:ital,wght@1,300;1,400;1,500;1,600;1,700&family=Poppins:wght@300;400;500;600;800&family=Quicksand:wght@400;600;700&display=swap");
+a {
+  text-decoration: none;
+  color: black;
 }
-input{
-  outline: none ;
-  border: #3bb77e;
+.Product-Box {
+  width: 288px;
+  height: 440px;
+  border: 1px solid rgba(188, 227, 201, 1);
+  border-radius: 10px;
+  font-family: "Quicksand", sans-serif;
 }
-input[type=number]::-webkit-inner-spin-button, 
-input[type=number]::-webkit-outer-spin-button {
-  opacity: 1;
-  color: #3bb77e;
-}
-.text1 {
-  font-weight: 400px;
-  font-size: 12px;
-  color: #7e7e7e;
-}
-.text2 {
-  font-weight: 700;
-  font-size: 12px;
-}
-.text3 {
-  font-weight: 400;
-  font-size: 12px;
-  color: #7e7e7e;
-}
-.text4 {
-  font-weight: 700;
+.Value {
+  width: 58px;
+  height: 32px;
+  border-radius: 0px 30px 30px 0px;
+  padding: 10px 15px 10px 15px;
+  position: relative;
+  top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   font-size: 20px;
-  color: #3bb77e;
+  font-weight: 400;
 }
-.text5 {
-  font-weight: 700;
+
+.Image {
+  width: 201.893px;
+  height: 200px;
+  position: relative;
+  left: 37.11px;
+  object-fit: contain;
+}
+
+.Details {
+  width: 255px;
+  height: 160px;
+  position: relative;
+  bottom: 5px;
+  left: 15px;
+}
+.Details .hodo {
   font-size: 12px;
-  color: #7e7e7e;
+  font-weight: 400;
 }
-.pLabel {
-  background-color: #3bb77e;
+.Details .Title {
+  font-size: 14px;
+  font-weight: 700;
+  margin-top: 5px;
 }
-.text1 {
-  color: #7e7e7e;
+.Details .Reviews {
+  width: 106px;
+  height: 18px;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  margin-top: 5px;
+}
+.Details .Reviews .Star {
+  width: 72px;
+  height: 14px;
+  font-size: 10px;
+  /* border: 1px solid black; */
+}
+.Details .Reviews .num {
+  width: 24px;
+  height: 18px;
+  font-size: 12px;
+  font-weight: 400;
+}
+.Details .gram {
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  margin-top: 5px;
+}
+.Details .money {
+  width: 260px;
+  height: 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+}
+.Details .money .dolla {
+  width: 86px;
+  height: 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.Details .money .dolla .lg {
+  font-size: 20px;
+  font-weight: 700;
+  color: rgba(59, 183, 126, 1);
+}
+.Details .money .dolla .sm {
+  font-size: 12px;
+  font-weight: 700;
+  color: rgba(126, 126, 126, 1);
+  position: relative;
+  top: 3px;
+  text-decoration: line-through;
+  margin-left: 5px;
+}
+.Details .add {
+  width: 75px;
+  height: 30px;
+  border-radius: 4px;
+  /* border: 1px solid rgba(59, 183, 126, 1); */
+  color: rgba(59, 183, 126, 1);
+  display: flex;
+  justify-content: space-between;
+  padding-top: 6px;
+}
+.Details .add .text {
+  font-size: 14px;
+  font-weight: 700;
+}
+.Details .add .arrow {
+  height: 10px;
+  font-size: 14px;
 }
 </style>

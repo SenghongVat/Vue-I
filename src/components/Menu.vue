@@ -1,30 +1,65 @@
 <template>
-  <div class="flex flex-row justify-between pr-5 mb-10 mt-14">
-    <div>
-      <h1 class="text-3xl">{{ header }}</h1>
-    </div>
-    <div class=" flex flex-row gap-3 items-center">
-      <p class="font-bold">All</p>
-      <div v-for="items in Group">
-        <p>{{ items }}</p>
-      </div>
+  <div class="Container_Menu">
+    <div class="Feature_Right">{{ Featured }}</div>
+    <div class="Menu_bar">
+      <ul>
+        <li class="active"><a href="">All</a></li>
+        <li><a href="">Milk & Dairies</a></li>
+        <li><a href="">Coffees & Tea</a></li>
+        <li><a href="">Pet Foods</a></li>
+        <li><a href="">Meats</a></li>
+        <li><a href="">Vegetables</a></li>
+        <li><a href="">Fruits</a></li>
+      </ul>
     </div>
   </div>
 </template>
 
 <script>
-import { mapState } from "pinia";
-import { useProductStore } from "../stores/ProductStore";
 export default {
   name: "Menu",
-  props:{
-    header:String,
-  },
-  
-  computed: {
-    ...mapState(useProductStore, ["Group"]),
-  }
+  props: ["Featured"],
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+@import url("https://fonts.googleapis.com/css2?family=Kantumruy+Pro:ital,wght@1,300;1,400;1,500;1,600;1,700&family=Poppins:wght@300;400;500;600;800&family=Quicksand:wght@400;600;700&display=swap");
+.Container_Menu {
+  width: 99%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.Container_Menu .Feature_Right {
+  font-family: "Quicksand", sans-serif;
+  font-size: 32px;
+  font-weight: 700;
+  
+}
+.Container_Menu .Menu_bar {
+  font-family: "Quicksand", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+}
+.Container_Menu .Menu_bar ul {
+  width: 750px;
+  height: 24px;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  gap: 30px;
+}
+.Container_Menu .Menu_bar ul .active {
+  font-weight: 700;
+  color: rgba(9, 9, 121, 1);
+}
+.Container_Menu .Menu_bar ul li {
+  list-style: none;
+}
+.Container_Menu .Menu_bar ul li a {
+  text-decoration: none;
+  color: rgba(37, 61, 78, 1);
+}
+
+
+</style>
